@@ -4,13 +4,30 @@ Version 1.0 · Cập nhật 2026-11-10
 
 ---
 
+# 0. TRANG HƯỚNG DẪN — BẮT ĐẦU TỪ ĐÂY
+
+> **[Mở trang hướng dẫn](https://claude.ai/artifact/Ru4WTBr3QQWUmsTt5YRQ6W)** — có nút Copy sẵn cho bộ não và từng file tri thức, 13 prompt mẫu lọc theo nhóm, 7 câu smoke test.
+
+Trang sinh thẳng từ nội dung repo nên **nút Copy luôn khớp file nguồn**. Sửa nội dung trang:
+
+```bash
+# sửa tools/huong-dan.json  (⛔ không sửa tay tools/huong-dan.html)
+python tools/gop-tham-khao.py     # gộp lại tri thức trước
+python tools/trang-huong-dan.py   # rồi sinh lại trang
+```
+
+File `tools/huong-dan.html` là **artifact**, không phải nguồn — `.gitignore` đã loại nó.
+
+---
+
 # 1. KIẾN TRÚC 3 TẦNG
 
 | Tầng | File | Đi đâu |
 |---|---|---|
 | **Bộ não** | `SYSTEM-PROMPT.md` — khối giữa hai vạch ▼▲ | Ô **Chỉ dẫn** / **Instructions** / **Custom instructions** |
 | **Tri thức** | 8 file `.md` trong `knowledge/` | Mục **Knowledge** / **Tệp tri thức** |
-| **Dữ liệu nguồn** | `data/lines.json` · `data/query-sets/*.json` · `data/geo-prompts.json` | **Không upload** — chỉ dùng cục bộ để sinh lại tri thức |
+| **Dữ liệu nguồn** | `data/lines.json` · `data/query-sets/*.json` · `data/truy-van/*.json` · `data/geo-prompts.json` | **Không upload** — chỉ dùng cục bộ để sinh lại tri thức |
+| **Bộ truy vấn** | `doc/BoTruyVanGEO-Sunwoo/*.xlsx` — 10 file **6 sheet** | **Không upload** — giao thẳng cho đội content làm bản đồ giao việc |
 
 Bộ não biết *cách làm*; knowledge cấp *dữ liệu + luật*; JSON là *nguồn sự thật* để sinh lại knowledge khi dữ liệu đổi.
 
@@ -54,6 +71,9 @@ pip install openpyxl
 # sinh lại tri thức sau khi sửa data/*.json
 python tools/build-index.py
 
+# sinh 10 bộ truy vấn 6 sheet (giao cho đội content)
+python tools/build-botruyvan.py
+
 # sinh file kế hoạch 2 TAB
 python tools/build-geo-plan.py --start 2027-01 --months 6
 python tools/build-geo-plan.py --start 2027-03 --months 4 --scope brand,threadlift,filler,acne
@@ -61,6 +81,9 @@ python tools/build-geo-plan.py --start 2027-01 --months 12 --tran 30
 
 # sinh bản gộp dự phòng
 python tools/gop-tham-khao.py
+
+# sinh lại trang hướng dẫn HTML
+python tools/trang-huong-dan.py
 ```
 
 File ra nằm ở `out/GEO-SUNWOO-T<bắt_đầu>-T<kết_thúc>-<năm>.xlsx`.

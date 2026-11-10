@@ -4,6 +4,10 @@
 > **Không sửa tay file này** — sửa JSON nguồn rồi chạy lại script.
 > Đây là **nguồn sự thật duy nhất về khối lượng công việc**: cột `Bài` của mỗi cụm là con số
 > duy nhất được phép dùng để tính chỉ tiêu sản lượng.
+>
+> Đây là bản rút gọn ở **cấp cụm**. Chi tiết **cấp truy vấn** (17 truy vấn tiếng Anh
+> mỗi cụm) nằm ở 10 file Excel 6 sheet trong `doc/BoTruyVanGEO-Sunwoo/`, sinh bằng
+> `python tools/build-botruyvan.py`.
 
 **Tổng kho:** 10 bộ dịch vụ · 150 cụm chủ đề · 2550 truy vấn · **204 bài viết** cần sản xuất.
 

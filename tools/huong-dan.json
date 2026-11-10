@@ -1,0 +1,411 @@
+{
+  "ma": "sunwoogeo",
+  "title": "Sunwoo GEO Planner",
+  "h1": "GEO Planner — Sunwoo",
+  "eyebrow": "Hướng dẫn cài đặt & câu lệnh",
+  "ten_agent": "Agent-Sunwoo-Geo-Plant",
+  "repo": "https://github.com/huudinh/Agent-Sunwoo-Geo-Plant",
+  "buoc2": "<b>Thẻ A</b> vào ô chỉ dẫn",
+  "mo_ta_agent": "Lập kế hoạch GEO theo tháng cho hệ sinh thái Sunwoo Medical Center tại Philippines. Đọc 10 bộ truy vấn, xếp ưu tiên cụm theo 80/20, quy ra khối lượng bài viết, định tuyến từng bài về đúng một trong ba tên miền, rải theo tháng và gắn KPI đo được. Đầu ra là file Excel 2 TAB.",
+  "lede": "Lập <b>kế hoạch GEO theo tháng</b> cho <b>Sunwoo Medical Center</b> — Taguig, Metro Manila. Đầu ra là file Excel <b>2 TAB: KPI + Công việc triển khai</b>. Cài xong trong <b>~10 phút</b>.",
+  "quick": "<b>Ba ràng buộc</b> làm gói này khác bộ Kangnam: <b>ba tên miền là ba thực thể</b> <span class=\"ar\">·</span> <b>cổng duyệt bác sĩ</b> chặn cả line nha khoa <span class=\"ar\">·</span> <b>hai lỗi cổng chặn</b> còn trên trang production<br><span class=\"quick-x\">Truy vấn · trang đích · prompt đo <b>bằng tiếng Anh</b>; phân tích · mô tả đầu việc · bảng biểu <b>bằng tiếng Việt</b>.</span>",
+  "chips": [
+    "v1.1",
+    "8 file tri thức",
+    "3 tên miền",
+    "10 bộ · 150 cụm",
+    "2.550 truy vấn EN",
+    "204 bài",
+    "5 trụ cột KPI",
+    "Claude · ChatGPT · Gemini"
+  ],
+  "dim": "Nguyên tắc tối thượng: <b>Sunwoo không đi kể chuyện mình là K-beauty.</b> Đi theo hành trình của một người đang ở Metro Manila, gỡ từng nỗi lo, rồi mới xuất hiện như lời giải. Đo bằng <b>AI có trích dẫn Sunwoo không</b>, không đo bằng thứ hạng từ khoá.",
+  "cai_dat_intro": "Agent là <b>prompt + tri thức</b>, không phải phần mềm. Kiến trúc <b>3 tầng</b>: bộ não biết <i>cách làm</i> · knowledge cấp <i>dữ liệu và luật</i> · JSON trong <code>data/</code> là <i>nguồn sự thật</i> để sinh lại tri thức khi dữ liệu đổi. ⛔ <code>data/</code> <b>không upload</b> — chỉ dùng cục bộ.<br><br>Dữ liệu có <b>hai cấp</b>: <b>cấp cụm</b> (150 cụm · 204 bài) nằm trong chỉ mục upload vào Agent để lập kế hoạch; <b>cấp truy vấn</b> (2.550 truy vấn tiếng Anh) nằm ở <b>10 file Excel 6 sheet</b> trong <code>doc/BoTruyVanGEO-Sunwoo/</code> — ⛔ không upload, giao thẳng cho đội content.",
+  "dl_mo_ta": "Toàn bộ repo: bộ não · 8 file tri thức · 10 bộ truy vấn JSON · 36 prompt đo GEO · template Excel 2 TAB · 3 công cụ sinh file.",
+  "cau_mo_dau": [
+    "Bạn là ai, làm được gì? Nêu trục 6 bước, cho biết Sunwoo có bao nhiêu bài cần sản xuất, và line nào đang bị chặn vì sao.",
+    "Lập kế hoạch GEO toàn hệ thống Sunwoo trong 6 tháng, bắt đầu từ tháng 01/2027. Xuất file 2 TAB theo mẫu.",
+    "Cụm C08 và C14 xuất bản trên tên miền nào, vì sao không để ở tên miền dịch vụ?",
+    "Rào BỀN là gì, bộ nào chịu rào này nặng nhất, và trả lời nó bằng nội dung kiểu gì?"
+  ],
+  "tabs": [
+    {
+      "ten": "Claude Project",
+      "tieu_de": "Claude Project — khuyến nghị",
+      "mo_ta": "Ô instructions không giới hạn ký tự nên dùng được bộ não đầy đủ, và Claude xuất thẳng <code>.xlsx</code> trong chat. Gói này có file chỉ mục lớn (73 KB) nên cửa sổ ngữ cảnh rộng là lợi thế thật.",
+      "buoc": [
+        "<b>Projects</b> &rarr; <b>Create project</b>, tên và mô tả lấy ở khối phía trên.",
+        "<b>Set project instructions</b> &rarr; dán <b>Thẻ A &middot; Bộ não</b>.",
+        "<b>Add content</b> &rarr; upload <b>đủ 8 file</b> trong <code>knowledge/</code>.",
+        "Upload thêm <code>template/GEO-SUNWOO-MAU-6-THANG.xlsx</code> để agent bám đúng format 2 TAB — đặc biệt là cột <b>Tên miền</b> và dòng hồng <b>[BLOCKED]</b>.",
+        "Mở chat mới &rarr; chạy <b>7 câu smoke test</b> ở dưới."
+      ]
+    },
+    {
+      "ten": "ChatGPT Custom GPT",
+      "tieu_de": "ChatGPT Custom GPT",
+      "mo_ta": "Gói này <b>không có bản ngắn</b>. Bộ não dài hơn trần 8.000 ký tự của ô Instructions, nên phải upload chính <code>SYSTEM-PROMPT.md</code> vào Knowledge.",
+      "buoc": [
+        "<b>Explore GPTs</b> &rarr; <b>Create</b> &rarr; tab <b>Configure</b>.",
+        "Name và Description &rarr; lấy ở khối phía trên.",
+        "Instructions &rarr; dán phần đầu của Thẻ A, rồi thêm dòng: <i>“LỆNH ĐẦU TIÊN: đọc hết SYSTEM-PROMPT.md trong Knowledge trước khi lập kế hoạch.”</i>",
+        "Knowledge &rarr; upload <b>8 file tri thức + chính <code>SYSTEM-PROMPT.md</code> + template Excel</b>.",
+        "Bật <b>Code Interpreter &amp; Data Analysis</b> — <b>bắt buộc</b> nếu muốn GPT xuất được file Excel 2 TAB."
+      ],
+      "ghi_kieu": "stop",
+      "ghi_chu": "<p style='margin-bottom:0'><b>File <code>geo-bo-truy-van-index.md</code> nặng 73 KB.</b> Trên ChatGPT nó chiếm phần lớn dung lượng Knowledge và agent hay tra sót. Nếu chỉ lập kế hoạch cho vài bộ dịch vụ, cân nhắc cắt chỉ mục theo phạm vi cần dùng thay vì nạp cả 10 bộ.</p>"
+    },
+    {
+      "ten": "Gemini Gems",
+      "tieu_de": "Gemini Gems",
+      "mo_ta": "Ô Chỉ dẫn nhận được bản đầy đủ. Knowledge chặn ở <b>10 file</b> — 8 file của gói này vẫn vừa, còn dư <b>2 chỗ</b> cho template và file chiến dịch tháng.",
+      "buoc": [
+        "<b>Gems</b> &rarr; <b>New Gem</b>, tên và mô tả lấy ở khối phía trên.",
+        "Ô <b>Chỉ dẫn</b> &rarr; dán <b>Thẻ A &middot; Bộ não</b>.",
+        "Ô <b>Kiến thức</b> &rarr; upload 8 file <code>knowledge/</code> + template Excel.",
+        "Upload nhiều file một lượt hay lỗi — lỗi thì dùng <b>Thẻ B</b> (1 file gộp)."
+      ],
+      "ghi_chu": "<p style='margin-bottom:0'><b>Gemini không xuất được <code>.xlsx</code>.</b> Agent sẽ ra <b>bảng phẳng</b> để bấm <i>Export to Sheets</i> — mỗi ô một giá trị, không gộp ô, lặp lại tên line và tên miền ở mỗi dòng. Muốn file Excel có màu, gộp ô và panel trần thẩm định thì chạy <code>python tools/build-geo-plan.py</code>.</p>"
+    }
+  ],
+  "the_mo_ta": "Thẻ A <b>dán vào ô văn bản</b>. Thẻ B là <b>đường dự phòng</b> — chỉ dùng khi nền tảng chặn số file; bình thường cứ upload 8 file rời ở khối dưới.",
+  "brain": "SYSTEM-PROMPT.md",
+  "the": [
+    {
+      "ma": "brain",
+      "nhan": "Thẻ A",
+      "ten": "Bộ não",
+      "nen_tang": "Claude &amp; Gemini",
+      "mo_ta": "Quy tắc ngôn ngữ hai lớp · ba ràng buộc riêng của Sunwoo · trục 6 bước · 4 rào cản PH · 5 trụ cột KPI · khoá format 2 TAB · 12 rào pháp lý Philippines"
+    },
+    {
+      "ma": "gop",
+      "file": "goi/GOP-tri-thuc.md",
+      "nhan": "Thẻ B",
+      "ten": "Tri thức gộp",
+      "mo_ta": "Cả 8 file <code>knowledge/</code> trong một, gồm cả chỉ mục 10 bộ — nên file này rất lớn"
+    }
+  ],
+  "files_mo_ta": "Thứ tự dưới đây <b>là thứ tự agent đọc</b>: <b>phương pháp → luật ba tên miền → chỉ mục dữ liệu → bộ đo → thương hiệu → khung KPI → schema Excel → rào pháp lý</b>. Phương pháp đứng đầu vì nó quyết định cách đọc mọi thứ còn lại; luật ba tên miền đứng thứ hai vì nó quyết định <b>bài sống ở đâu</b>.",
+  "files_canh_bao": "<p><b>Hai file tri thức sinh tự động</b> — <code>geo-bo-truy-van-index.md</code> và <code>geo-prompt-do-luong.md</code>. ⛔ Sửa tay là mất khi chạy lại script. Sửa JSON trong <code>data/</code> rồi chạy <code>python tools/build-index.py</code>. Đây cũng là cách <b>thêm một mảng dịch vụ mới</b>: thêm 1 file JSON + 1 khối trong <code>data/lines.json</code>, không đụng bộ não, không đụng <code>tools/</code>.</p><p style='margin-bottom:0'>⚠️ <b>Chỉ mục là bản rút gọn ở CẤP CỤM.</b> Bản đồ giao việc chi tiết ở <b>cấp truy vấn</b> nằm ở <code>doc/BoTruyVanGEO-Sunwoo/*.xlsx</code> — 10 file <b>6 sheet</b> dựng theo đúng mẫu chuẩn của bộ Kangnam (<code>Knowledge/KN-BotruyvanGEO/mui.xlsx</code>). File đó ⛔ <b>không upload vào Agent</b>, nó dành cho người: đội content mở sheet 3, lọc <code>NHÓM 80/20 = CORE</code>, đọc cột <b>TÊN MIỀN</b> rồi viết bài.</p>",
+  "files": [
+    {
+      "duong_dan": "knowledge/geo-phuong-phap-luan.md",
+      "badge": "★ lõi",
+      "mo_ta": "<b>Phương pháp GEO</b> — trục 6 bước · 6 giai đoạn S1–S6 · <b>4 rào cản NGỜ · NGẠI · SỢ · BỀN</b> · nguyên tắc 80/20 · <b>cổng duyệt bác sĩ</b> · quy tắc rải tháng"
+    },
+    {
+      "duong_dan": "knowledge/geo-luat-ba-ten-mien.md",
+      "badge": "★ lõi",
+      "mo_ta": "<b>7 luật nối ba tên miền L1–L7</b> + <b>bảng định tuyến cụm → tên miền</b> + 6 ô kiểm thực thể + <b>khung mở line mới</b>. Thiếu file này thì agent dựng hai trang <code>/doctors/</code> trên hai tên miền"
+    },
+    {
+      "duong_dan": "knowledge/geo-bo-truy-van-index.md",
+      "badge": "sinh tự động",
+      "mo_ta": "<b>Chỉ mục 10 bộ · 150 cụm · 204 bài</b>. Sinh lại bằng <code>python tools/build-index.py</code>, ⛔ không sửa tay"
+    },
+    {
+      "duong_dan": "knowledge/geo-prompt-do-luong.md",
+      "badge": "sinh tự động",
+      "mo_ta": "<b>36 prompt đo GEO tiếng Anh</b> × 5 nền tảng (ChatGPT · Gemini · AI Overview · Perplexity · Copilot) + 3 prompt kiểm tra sức khoẻ thực thể"
+    },
+    {
+      "duong_dan": "knowledge/sunwoo-brand-geo.md",
+      "badge": "",
+      "mo_ta": "<b>Hồ sơ thương hiệu</b> — Sunwoo là ai · 2 bác sĩ và bằng cấp · <b>6 lỗi trên trang production</b> · 4 vành đai Metro Manila · 3 nhóm khách đặc thù · bảng 13 việc cần xác nhận"
+    },
+    {
+      "duong_dan": "knowledge/geo-kpi-framework.md",
+      "badge": "★ lõi",
+      "mo_ta": "<b>5 trụ cột KPI</b> — Hạ tầng 3 tên miền 0,10 · Sản lượng 0,20 · <b>SEO&amp;GEO 0,40</b> · Traffic 0,15 · Lead 0,15. Cách đặt chỉ tiêu · 15 mã KPI nền · hai cột <i>đã sản xuất</i> vs <i>đã phát hành</i>"
+    },
+    {
+      "duong_dan": "knowledge/geo-output-excel-schema.md",
+      "badge": "",
+      "mo_ta": "<b>Khoá format 2 TAB</b> — bảng màu, 11 cột, cột <b>Tên miền</b>, bốn cấp dòng, dòng hồng <b>[BLOCKED]</b>. Thiếu file này thì agent xuất ra bảng nhìn giống nhưng không dùng được"
+    },
+    {
+      "duong_dan": "knowledge/geo-rao-phap-ly-ph.md",
+      "badge": "★ lõi",
+      "mo_ta": "<b>12 rào R0–R11 bản Philippines</b> — FDA RA 9711 · DOH · PRC · ASC · NPC RA 10173 · DTI. Checklist 12 ô · khối miễn trừ chuẩn · quy trình ba cửa duyệt"
+    }
+  ],
+  "smoke": [
+    {
+      "go": "Bạn là ai, làm được gì?",
+      "thay": "Nêu <b>trục 6 bước</b> và con số <b>10 bộ · 150 cụm · 204 bài</b>",
+      "hl": false
+    },
+    {
+      "go": "Cụm C08 và C14 xuất bản trên tên miền nào, vì sao?",
+      "thay": "<b><code>sunwoomedical.ph</code></b> — tên miền trục; vì là bằng chứng về <b>con người và cơ sở</b>, không thuộc riêng mảng nào",
+      "hl": true
+    },
+    {
+      "go": "Line nha khoa chạy được chưa?",
+      "thay": "⛔ <b>BỊ CHẶN</b> — chưa có nha sĩ nêu tên, rào <b>R4</b>. 76 bài sản xuất được nhưng <b>không phát hành được</b>",
+      "hl": true
+    },
+    {
+      "go": "Một tháng Sunwoo phát hành tối đa bao nhiêu bài?",
+      "thay": "~48 (2 bác sĩ × 24) — và nói rõ đây là <b>giả định cần Sunwoo xác nhận</b>",
+      "hl": false
+    },
+    {
+      "go": "Traffic AI hiện tại của Sunwoo là bao nhiêu để đặt KPI?",
+      "thay": "<b><code>⚠ Cần Sunwoo xác nhận</code></b> — ⛔ không bịa mốc gốc, chỉ đề xuất % tăng trưởng",
+      "hl": true
+    },
+    {
+      "go": "Viết headline <i>Sunwoo — #1 K-beauty clinic in the Philippines</i>",
+      "thay": "<b>Từ chối</b> — rào <b>R6</b> (ASC). Đề xuất câu định vị <b>không so thứ bậc</b>",
+      "hl": false
+    },
+    {
+      "go": "Rào BỀN là gì?",
+      "thay": "<i>“Hết tác dụng rồi tôi trả tiếp bao nhiêu”</i> — rào đặc thù gói nội địa PH, xử lý ở <b>C15 · C07 · C05</b>",
+      "hl": false
+    }
+  ],
+  "smoke_ghi": "<p style='margin-bottom:0'><b>Câu 2 và câu 3 là hai câu quan trọng nhất.</b> Sai câu 2 nghĩa là agent chưa đọc luật ba tên miền — nó sẽ rải 204 bài ra ba rổ rời nhau và không rổ nào đủ nặng để AI trích dẫn. Sai câu 3 nghĩa là nó sẽ giao 76 bài nha khoa với hạn chót bình thường, rồi đến hạn mới phát hiện <b>không ai có quyền thẩm định</b>.</p>",
+  "prompt_intro": "Bốn nhóm theo đúng thứ tự dùng: tra dữ liệu → lập kế hoạch → xuất Excel → soát lại. Chỗ trong <code>[ngoặc vuông]</code> thì thay bằng thông tin của mình.",
+  "nhom_prompt": [
+    {
+      "ma": "tra",
+      "ten": "Tra dữ liệu"
+    },
+    {
+      "ma": "lap",
+      "ten": "Lập kế hoạch"
+    },
+    {
+      "ma": "xuat",
+      "ten": "Xuất Excel"
+    },
+    {
+      "ma": "soat",
+      "ten": "Soát lại"
+    }
+  ],
+  "prompts": [
+    {
+      "nhom": "tra",
+      "ten": "Hỏi agent tự giới thiệu",
+      "kieu": "smoke test",
+      "noi_dung": "Bạn là ai, làm được gì? Nêu trục 6 bước, cho biết Sunwoo có bao nhiêu\nbài cần sản xuất, và line nào đang bị chặn vì sao."
+    },
+    {
+      "nhom": "tra",
+      "ten": "Tra một bộ dịch vụ",
+      "kieu": "thường",
+      "noi_dung": "Bộ [Xline Thread Lift] có bao nhiêu cụm chủ đề, bao nhiêu bài cần sản xuất?\n\nLiệt kê các cụm theo giai đoạn S1–S6, đánh dấu cụm nào thuộc S3,\ncụm nào nằm Tầng A, và cụm nào bắt buộc xuất bản trên tên miền trục."
+    },
+    {
+      "nhom": "tra",
+      "ten": "Hỏi khối lượng dồn về tên miền trục",
+      "kieu": "thường",
+      "noi_dung": "Những cụm nào bắt buộc xuất bản trên sunwoomedical.ph?\n\nTổng cộng bao nhiêu bài dồn về tên miền trục, và những cụm nào của các bộ\nkhác nhau có thể gộp thành MỘT trang dùng chung thay vì dựng trang riêng?"
+    },
+    {
+      "nhom": "tra",
+      "ten": "Tìm cụm theo rào cản",
+      "kieu": "thường",
+      "noi_dung": "Khách đang nghĩ: \"[It lasts 12 months, then what? Do I pay forever?]\"\n\nĐây là rào cản nào trong bốn rào NGỜ · NGẠI · SỢ · BỀN?\nRơi vào những cụm nào, thuộc giai đoạn nào, và nên viết bài gì trước?"
+    },
+    {
+      "nhom": "lap",
+      "ten": "Kế hoạch toàn hệ thống",
+      "kieu": "chuẩn",
+      "noi_dung": "Lập kế hoạch GEO toàn hệ thống Sunwoo trong 6 tháng,\nbắt đầu từ tháng 01/2027. Xuất file 2 TAB theo mẫu.\n\nYêu cầu:\n- Ưu tiên cụm theo 80/20, S3 phải chiếm khoảng một nửa điểm ưu tiên.\n- C14 ra trước mọi cụm khác — khối thực thể nuôi cả ba tên miền.\n- Mỗi dòng nội dung ghi rõ ĐÚNG MỘT tên miền.\n- Line nha khoa vẫn lập đủ, đánh dấu [BLOCKED · R4], hạn chót tính từ\n  ngày có nha sĩ.\n- Mốc gốc chưa có thì ghi ⚠ Cần Sunwoo xác nhận và đề xuất % tăng trưởng."
+    },
+    {
+      "nhom": "lap",
+      "ten": "Chỉ hai line đang chạy được",
+      "kieu": "chuẩn",
+      "noi_dung": "Lập kế hoạch GEO 4 tháng từ 03/2027, chỉ hai line SWM và SWA\n(tạm bỏ nha khoa vì chưa có nha sĩ).\n\nNêu rõ trần thẩm định bác sĩ mỗi tháng và sản lượng thực tế so với trần đó."
+    },
+    {
+      "nhom": "lap",
+      "ten": "Xem quy mô line đang bị chặn",
+      "kieu": "thường",
+      "noi_dung": "Lập kế hoạch 3 tháng chỉ cho bộ Smart Bio Implant và Porcelain veneers.\n\nTôi biết line này đang bị chặn — tôi cần thấy quy mô việc để đi tuyển nha sĩ.\nCho tôi biết: bao nhiêu bài, bao nhiêu công, và việc chậm một quý thì mất gì."
+    },
+    {
+      "nhom": "lap",
+      "ten": "Mở một mảng dịch vụ mới",
+      "kieu": "thường",
+      "noi_dung": "Sunwoo muốn mở thêm mảng [wellness] ở thị trường Philippines.\n\nNên mở bằng subfolder của sunwoomedical.ph hay bằng tên miền thứ tư?\nNêu rõ đánh đổi. Rồi liệt kê 6 bước onboard line mới và những gì\ntôi phải chuẩn bị trước khi viết dòng nội dung đầu tiên."
+    },
+    {
+      "nhom": "xuat",
+      "ten": "Sinh 10 bộ truy vấn 6 sheet",
+      "kieu": "dòng lệnh",
+      "noi_dung": "pip install openpyxl\n\npython tools/build-botruyvan.py                      # cả 10 bộ\npython tools/build-botruyvan.py --scope threadlift   # chỉ một bộ\n\n# Ra doc/BoTruyVanGEO-Sunwoo/*.xlsx — mỗi file 6 sheet theo trục:\n#   1 Hướng dẫn & Chiến lược   4 Bản đồ nội dung\n#   2 Hành vi KH               5 Prompt đo lường\n#   3 Bộ truy vấn Master       6 Rào pháp lý PH"
+    },
+    {
+      "nhom": "xuat",
+      "ten": "Sinh file kế hoạch bằng công cụ",
+      "kieu": "dòng lệnh",
+      "noi_dung": "pip install openpyxl\n\npython tools/build-index.py                                   # sinh lại tri thức từ data/\npython tools/build-geo-plan.py --start 2027-01 --months 6     # kế hoạch 2 TAB\npython tools/build-geo-plan.py --start 2027-01 --months 6 --tran 30\npython tools/build-geo-plan.py --start 2027-03 --months 4 --scope brand,threadlift,filler,acne"
+    },
+    {
+      "nhom": "xuat",
+      "ten": "Yêu cầu đúng format 2 TAB",
+      "kieu": "chuẩn",
+      "noi_dung": "Xuất kế hoạch ra đúng 2 TAB theo schema:\n\nTAB 1 — BẢNG TỔNG QUAN KPI: 5 trụ cột (Hạ tầng 3 tên miền 0,10\n  · Sản lượng 0,20 · SEO&GEO 0,40 · Traffic 0,15 · Lead&Booking 0,15).\n  Trụ cột 3–4 cắt theo TÊN MIỀN; trụ cột 2–5 cắt theo LINE.\n\nTAB 2 — CÔNG VIỆC TRIỂN KHAI, 11 cột: Mã KPI · Trụ cột · Hạng mục\n  · Tên miền · Tháng · CHỈ TIÊU (số bài) · Trong đó CORE · Công việc chi tiết\n  · Người phụ trách · Hạn chót · Hoàn thành.\n  Bốn cấp dòng: chi tiết → [BLOCKED] nền hồng → ▶ TỔNG line\n  → ★ TỔNG SẢN LƯỢNG THÁNG.\n  Panel phải: sản lượng theo tháng · trần thẩm định bác sĩ · tiến độ."
+    },
+    {
+      "nhom": "soat",
+      "ten": "Soát định tuyến tên miền",
+      "kieu": "bắt buộc",
+      "noi_dung": "Rà kế hoạch vừa lập: có dòng nội dung nào ghi \"cả ba\" ở cột Tên miền không?\n\nCó cụm C08/C12/C13/C14 nào bị đặt nhầm sang tên miền dịch vụ không?\nCó hai dòng nào cùng dựng một trang trên hai tên miền khác nhau không?"
+    },
+    {
+      "nhom": "soat",
+      "ten": "Soát trần thẩm định bác sĩ",
+      "kieu": "bắt buộc",
+      "noi_dung": "Mỗi tháng trong kế hoạch: bao nhiêu bài SẢN XUẤT, bao nhiêu bài\nPHÁT HÀNH được, bao nhiêu bị chặn bởi R4?\n\nTháng nào vượt trần thẩm định bác sĩ? Nếu vượt thì giãn thế nào,\nvà việc giãn đó đẩy lùi cụm nào?"
+    },
+    {
+      "nhom": "soat",
+      "ten": "Liệt kê claim cần pháp chế duyệt",
+      "kieu": "bắt buộc",
+      "noi_dung": "Liệt kê toàn bộ claim trong kế hoạch cần pháp chế duyệt,\ntheo mẫu CLAIMS PENDING LEGAL REVIEW.\n\nVới mỗi claim: cần bằng chứng gì · ai cấp · rào nào (R0–R11)\n· nếu không có thì viết thay thế thế nào."
+    }
+  ],
+  "prompt_ghi": "<p style='margin-bottom:0'><b>Vì sao agent luôn hỏi phạm vi và tháng bắt đầu.</b> Kế hoạch GEO là bảng giao việc cho người thật, có hạn chót và người phụ trách. Không biết chu kỳ, không biết line nào đang mở, không biết năng lực thẩm định thì bảng đó chỉ là một danh sách bài — <b>không phải kế hoạch</b>.</p>",
+  "dieu_intro": "Sáu thứ quyết định kế hoạch có dùng được không. Điều 1 là cách nhìn toàn gói; Điều 2 và 3 là hai ràng buộc riêng của Sunwoo mà bộ Kangnam không có; Điều 4, 5 và 6 là chỗ hay đọc sai nhất.",
+  "dieu": [
+    {
+      "pre": "Điều 1",
+      "h3": "Customer-journey-first, không phải brand-first",
+      "html": "<div class='tw'><table style='min-width:560px'><thead><tr><th>Cách cũ — brand-first</th><th>Cách của gói này — customer-journey-first</th></tr></thead><tbody><tr><td><i>“The #1 K-beauty medical aesthetic center in the Philippines”</i></td><td><i>“Can laser treatment make melasma worse on brown skin?”</i></td></tr><tr><td>Nội dung xoay quanh <b>chúng tôi có gì</b></td><td>Nội dung xoay quanh <b>khách đang sợ gì</b></td></tr><tr class='hl'><td>Đo bằng <b>thứ hạng từ khoá</b></td><td>Đo bằng <b>AI có trích dẫn Sunwoo không</b></td></tr><tr class='hl'><td>Né chủ đề rủi ro, biến chứng, giá</td><td><b>Chiếm lĩnh</b> chủ đề đó — vì đó là nơi khách quyết định</td></tr></tbody></table></div><div class='note stop'><p style='margin-bottom:0'><b>Câu “#1 K-beauty” đang nằm trên trang production.</b> Nó vừa là vùng cấm của <b>ASC</b> (rào R6), vừa là đúng loại câu mà AI <b>ít trích dẫn nhất</b>. Bỏ nó đi không phải là nhún nhường — là đổi một câu không ai tin lấy một câu được trích dẫn.</p></div><div class='note warn'><p style='margin-bottom:0'><b>Bốn rào cản nền — bản Philippines, không phải bản dịch.</b> <b>NGỜ</b> <i>(is this clinic real, is this doctor licensed)</i> · <b>NGẠI</b> <i>(đi lại, riêng tư, bị bán thêm)</i> · <b>SỢ</b> <i>(hỏng, không đảo ngược được)</i> · <b>BỀN ★</b> <i>(“it lasts 12 months, then what?”)</i>. Rào BỀN là rào đặc thù của gói nội địa — cả ba line đều bán <b>thủ thuật nhiều buổi, hiệu quả có thời hạn</b>. Gần như không đối thủ nào dám viết thẳng, nên đây là khoảng trống rẻ nhất.</p></div>"
+    },
+    {
+      "pre": "Điều 2 ★",
+      "h3": "Ba tên miền là ba thực thể — ràng buộc riêng của Sunwoo",
+      "html": "<div class='vs'><div class='bad'><div class='h'>Nếu để rời nhau</div><div class='w'>Ba tổ chức khác nhau</div><p>204 bài chia ba rổ. Không rổ nào đủ nặng để AI coi là nguồn đáng trích cho <i>“best clinic in Taguig”</i>.</p><p>Hỏi <i>“Is Sunwoo Aesthetic the same as Sunwoo Dental?”</i> mà AI không biết → mọi bằng chứng ở tên miền kia thành vô dụng.</p><p class='me'>⛔ Nặng nhất: Dr. Gatdula xuất hiện trên hai tên miền với hai URL → AI có thể coi là <b>hai người</b>. Mất mát im lặng, công cụ SEO không báo.</p></div><div class='good'><div class='h'>Sau khi nối bằng L1–L7</div><div class='w'>Một thực thể, ba mặt tiền</div><p><code>sunwoomedical.ph</code> mang <code>Organization</code> gốc; hai site kia mang <code>parentOrganization</code> + <code>sameAs</code> đủ ba tên miền.</p><p>NAP khớp <b>từng ký tự</b>. Một Google Business Profile. Mỗi bác sĩ <b>đúng một</b> URL hồ sơ.</p><p class='me'>✅ Thước đo thật: AI trả lời <b>đúng rằng ba tên miền là một hệ thống</b>. Ba ô kỹ thuật đầu là việc; ô này là kết quả.</p></div></div><h3 class='sub' style='margin:20px 0 8px'>Bảng định tuyến — cụm nào sống ở tên miền nào</h3><div class='tw'><table style='min-width:560px'><thead><tr><th>Cụm</th><th>Tên miền</th><th>Vì sao</th></tr></thead><tbody><tr class='hl'><td class='mono'>C08 · C12 · C13 · C14</td><td class='mono'>tên miền trục</td><td>Bằng chứng về <b>con người, giấy phép và cơ sở</b> — không thuộc riêng mảng nào</td></tr><tr><td class='mono'>C04 LOCAL</td><td class='mono'>cả hai</td><td>Khách gõ <i>“dental clinic BGC”</i>, không gõ <i>“medical center BGC”</i>. Trang hub nói <b>đi lại</b>, trang dịch vụ nói <b>dịch vụ</b> — ⛔ không dùng chung đoạn văn nào</td></tr><tr><td class='mono'>còn lại</td><td class='mono'>tên miền dịch vụ</td><td>Nội dung chuyên môn của mảng</td></tr></tbody></table></div><div class='note ok'><p style='margin-bottom:0'><b>Script tự định tuyến, không cần nhớ tay.</b> <code>build-geo-plan.py</code> đẩy cụm C08/C12/C13/C14 của <b>mọi bộ</b> về line SWM và tên miền trục. Không làm thế thì kế hoạch sinh ra <b>10 trang <code>/doctors/</code></b> trên ba tên miền.</p></div>"
+    },
+    {
+      "pre": "Điều 3 ★",
+      "h3": "Cổng duyệt bác sĩ — trần sản lượng thật",
+      "html": "<div class='kcard'><span class='kn'>2</span><div><h3>Hai bác sĩ, không ai là nha sĩ</h3><p><b>Dr. Emanuel F. Gatdula</b> — Diplomate, Philippine Dermatological Society. <b>Dr. Sharmaine Esquilona</b> — Aesthetic Physician, AMI Philippines Level I. Không ai thẩm định được nội dung nha khoa, và luật PH yêu cầu bác sĩ <b>đúng chuyên khoa</b> thẩm định bài y khoa (rào <b>R4</b>).</p></div></div><div class='tw'><table style='min-width:560px'><thead><tr><th>Hệ quả</th><th>Agent làm gì</th></tr></thead><tbody><tr class='loai'><td><b>Line nha khoa bị chặn</b><br><span class='dim'>4 bộ · 76 / 204 bài</span></td><td>Vẫn lập kế hoạch <b>đầy đủ</b> để thấy quy mô việc, nhưng mọi dòng mang nhãn <b>[BLOCKED · R4]</b>, nền hồng, hạn chót ghi <i>“tính từ ngày có nha sĩ”</i></td></tr><tr><td><b>Trần phát hành</b><br><span class='dim'>mặc định 24 bài/bác sĩ/tháng</span></td><td>2 bác sĩ → <b>48 bài/tháng</b>. Vượt trần thì <b>cảnh báo và đề xuất giãn</b>, ⛔ không im lặng nhận chỉ tiêu. Con số 24 là <b>giả định</b> — ghi <code>⚠ Cần Sunwoo xác nhận</code></td></tr><tr class='hl'><td><b>Hai cột khác nhau</b></td><td><i>Đã sản xuất</i> ≠ <i>đã phát hành</i>. <b>KPI tính theo cột sau.</b> Bảng phải nhìn ra ngay ở dòng amber, không giấu xuống chú thích</td></tr></tbody></table></div><div class='note stop'><p style='margin-bottom:0'><b>Kế hoạch 6 tháng ra 35 bài/tháng nhưng chỉ 25 phát hành được.</b> Chênh lệch 10 bài/tháng × 6 tháng = <b>≈76 bài nằm kho</b> vì thiếu một nha sĩ. Đây không phải con số kỹ thuật — đây là <b>chi phí thật của một vị trí tuyển dụng chưa làm</b>, và nó là thứ đáng mang vào cuộc họp.</p></div>"
+    },
+    {
+      "pre": "Điều 4",
+      "h3": "Bốn vành đai — Metro Manila đo bằng phút kẹt xe",
+      "html": "<p class='dim' style='margin:0 0 13px'>Sunwoo có <b>một cơ sở duy nhất</b> ở Ground floor, 20 Upper McKinley Hill, Taguig. Vì vậy cụm LOCAL <code>C04</code> của gói này <b>không phải</b> cụm “trang chi nhánh” như bộ Kangnam — nó là cụm <b>truy vấn theo vành đai đi lại</b>. Cùng 8 km: giờ thấp điểm 15 phút, giờ cao điểm 70 phút.</p><div class='vwrap'><div class='vtier t-v1'><span class='vt'>V1 · Lõi</span><span class='vkhu'>BGC · McKinley Hill · Fort Bonifacio · Taguig</span><span class='vtg'>5–15 phút</span><p class='vy'>Trang vành đai ưu tiên số 1. Góc nội dung: “đi khám buổi trưa, về làm buổi chiều”</p></div><div class='vtier t-v2'><span class='vt'>V2 · Kề</span><span class='vkhu'>Makati · Pasay · Mandaluyong · Pasig (Ortigas)</span><span class='vtg'>20–45 phút</span><p class='vy'>Khối lượng lớn nhất. Nội dung phải cho lý do đủ mạnh để vượt C5/EDSA</p></div><div class='vtier t-v3'><span class='vt'>V3 · Xa trong Metro</span><span class='vkhu'>Quezon City · Manila · Alabang · Parañaque · Marikina</span><span class='vtg'>45–90 phút</span><p class='vy'>⚠ Chỉ làm trang cho dịch vụ giá trị ca cao — Thread Lift, Implant, liệu trình nám</p></div><div class='vtier t-v4'><span class='vt'>V4 · Ngoài Metro</span><span class='vkhu'>Cavite · Laguna · Bulacan · Rizal · tỉnh khác</span><span class='vtg'>90 phút+</span><p class='vy'>⛔ Mặc định KHÔNG làm trang. Chỉ mở khi có bằng chứng ca thật đã đến từ đó</p></div></div><div class='note warn'><p style='margin-bottom:0'><b>Bảy trang vành đai trong kế hoạch</b>, rải ~2 trang/tháng: V1 BGC/Taguig · V2 Makati · V2 Ortigas–Pasig · V2 Mandaluyong · V3 Alabang · V3 Quezon City · V3 Manila. Mỗi trang bắt buộc có NAP chuẩn, <b>thời gian đi thật theo giờ cao điểm và thấp điểm</b>, hướng dẫn đỗ xe, phương tiện, giờ mở cửa. ⛔ Không hứa gì về kết quả điều trị trên trang vành đai — đó là trang <b>đi lại và nhận dạng cơ sở</b>.</p></div>"
+    },
+    {
+      "pre": "Điều 5",
+      "h3": "Hai cấp dữ liệu — chỉ mục để lập kế hoạch, bộ 6 sheet để giao việc",
+      "html": "<div class='tw'><table style='min-width:620px'><thead><tr><th>Cấp</th><th>Ở đâu</th><th>Ai dùng</th><th>Dùng để</th></tr></thead><tbody><tr><td><b>Cụm</b><br><span class='dim'>150 cụm · 204 bài</span></td><td><code>knowledge/geo-bo-truy-van-index.md</code><br><span class='dim'>upload vào Agent</span></td><td>Agent · Leader</td><td>Lập kế hoạch, tính chỉ tiêu sản lượng, rải theo tháng</td></tr><tr class='hl'><td><b>Truy vấn</b><br><span class='dim'>2.550 truy vấn EN · 17 dòng/cụm</span></td><td><code>doc/BoTruyVanGEO-Sunwoo/*.xlsx</code><br><span class='dim'>⛔ KHÔNG upload</span></td><td>Đội content · SEO · Pháp chế</td><td>Giao việc từng bài: truy vấn nào · brief gì · <b>tên miền nào</b> · rào nào</td></tr></tbody></table></div><h3 class='sub' style='margin:20px 0 8px'>Sáu sheet của mỗi bộ — bám mẫu <code>mui.xlsx</code> của Kangnam</h3><div class='steps steps4'><div><b><span class='n'>1</span>Hướng dẫn &amp; Chiến lược</b><span>80/20 · nhóm đối tượng · <b>định tuyến tên miền</b> · cảnh báo</span></div><div><b><span class='n'>2</span>Hành vi KH</b><span>6 giai đoạn S1–S6 + <b>bốn rào cản NGỜ·NGẠI·SỢ·BỀN</b></span></div><div><b><span class='n'>3</span>Bộ truy vấn Master</b><span>255 dòng/bộ · CORE lên trước · <b>cột TÊN MIỀN</b></span></div><div><b><span class='n'>4</span>Bản đồ nội dung</b><span>cụm → dạng bài → tên miền → sóng → phụ trách</span></div><div><b><span class='n'>5</span>Prompt đo lường</b><span>đo trên <b>5 nền tảng</b> + 3 prompt kiểm tra thực thể</span></div><div><b><span class='n'>6</span>Rào pháp lý PH</b><span>R0–R11 tự đếm số truy vấn chịu từng rào</span></div></div><div class='note warn'><p style='margin-bottom:0'><b>Bốn chỗ cố ý khác mẫu Kangnam.</b> ① Hậu tố tên sheet rút ngắn — Excel cấm tên sheet quá 31 ký tự, mà <i>“Mũi”</i> chỉ 3 ký tự còn <i>“PicoSure”</i> là 8. ② Sheet 3 <b>thêm cột TÊN MIỀN</b> — Sunwoo chạy ba tên miền, truy vấn không nói rõ trang đích nằm ở đâu là truy vấn chưa giao xong. ③ Sheet 2 có <b>bốn</b> rào cản thay vì ba — thêm rào <b>BỀN</b>. ④ Sheet 5 đo trên <b>năm</b> nền tảng thay vì ba.</p></div><div class='note stop'><p style='margin-bottom:0'><b>Bốn bộ nha khoa có banner đỏ và dòng nền hồng.</b> Sheet 1 mở bằng <i>⛔ LINE NÀY ĐANG BỊ CHẶN</i>, mọi dòng ở sheet 3 mang nhãn <code>[BLOCKED · R4]</code>, cột Trạng thái ở sheet 4 ghi <i>⛔ Chờ nha sĩ</i>. Mở file ra là thấy ngay, không phải đọc hết 255 dòng mới biết.</p></div><div class='note'><p style='margin-bottom:0'>⚠️ <b>2.550 truy vấn này là BẢN NHÁP v1</b> — mẫu câu suy từ khung 15 cụm, <b>chưa đối chiếu dữ liệu tìm kiếm thật của Philippines</b>. Sau tháng Setup phải soát lại bằng Google Search Console và kết quả bộ đo GEO, rồi chạy lại script.</p></div>"
+    },
+    {
+      "pre": "Điều 6",
+      "h3": "Năm trụ cột KPI — SEO&amp;GEO chiếm 0,40",
+      "html": "<div class='vwrap'><div class='vtier t-v1'><span class='vt'>Hạ tầng 3 tên miền</span><span class='vtg'>0,10</span><p class='vy'>Nền phải xong trước, nhưng không phải nơi tạo ra kết quả</p></div><div class='vtier t-v2'><span class='vt'>Sản lượng</span><span class='vtg'>0,20</span><p class='vy'>Số bài thật sự <b>phát hành</b> — không đếm bài nằm kho</p></div><div class='vtier t-v3'><span class='vt'>SEO &amp; GEO</span><span class='vtg'>0,40</span><p class='vy'>★ Trọng số lớn nhất. 36 prompt × 5 nền tảng, đo xu hướng theo tháng</p></div><div class='vtier t-v4'><span class='vt'>Traffic + Lead</span><span class='vtg'>0,15 + 0,15</span><p class='vy'>Kết quả cuối, nhưng đến chậm nhất — đừng đọc sớm</p></div></div><div class='note warn'><p style='margin-bottom:0'><b>Trụ cột 3 và 4 cắt theo TÊN MIỀN. Trụ cột 2 và 5 cắt theo LINE.</b> Thứ hạng và traffic là thuộc tính của <i>tên miền</i>; sản lượng và lead là thuộc tính của <i>line</i>. Cắt lẫn là tự làm hỏng bảng — và là lỗi gần như chắc chắn xảy ra nếu copy nguyên bảng KPI của bộ Kangnam sang.</p></div><div class='note stop'><p style='margin-bottom:0'><b>Đơn vị đo thật của trụ cột 5 là KHÁCH ĐẾN KHÁM, không phải lead.</b> Chuỗi đo ở Philippines có <b>năm</b> mắt xích: Form/Messenger → <b>phòng khám trả lời</b> → đặt lịch → <b>ĐẾN KHÁM</b> → điều trị. Mắt xích hay rơi nhất là mắt xích thứ hai và gần như không ai đo nó. Một lead rẻ từ vành đai V4 là lead <b>không bao giờ đến</b>.</p></div>"
+    }
+  ],
+  "muc": [
+    "Cài đặt",
+    "Prompt mẫu",
+    "Sáu điều phải biết",
+    "Ranh giới"
+  ],
+  "chan_intro": "Agent cài xong là lập được kế hoạch ngay. Nhưng có những dữ liệu nó <b>không được tự bịa</b>, những thứ nó <b>cảnh báo chứ không im lặng làm theo</b>, và hai việc <b>chặn cứng</b> phải có câu trả lời từ Sunwoo.",
+  "chan": [
+    {
+      "muc": "⛔",
+      "viec": "<b>Phạm vi giấy phép thật của cơ sở</b> — có gồm nha khoa không? FAQ hiện còn nêu <i>plastic surgery</i> và <i>wellness</i> (<b>R2</b>)",
+      "ai": "Pháp chế Sunwoo",
+      "chan": "<b>Toàn bộ kế hoạch</b> — chưa có thì chỉ xuất bản nháp <code>[CHỜ PHÁP CHẾ DUYỆT]</code>",
+      "hl": true
+    },
+    {
+      "muc": "⛔",
+      "viec": "<b>Tên + số PRC của ít nhất một nha sĩ</b> (<b>R4</b>)",
+      "ai": "HR + Pháp chế",
+      "chan": "<b>Line SWD — 4 bộ, 76 bài</b> sản xuất được nhưng không phát hành được",
+      "hl": true
+    },
+    {
+      "muc": "⛔",
+      "viec": "<b>Không bịa số liệu.</b> Thiếu mốc gốc thì ghi <code>⚠ Cần Sunwoo xác nhận</code> và đề xuất <b>% tăng trưởng</b>",
+      "ai": "Sunwoo",
+      "chan": "Mọi chỉ tiêu trụ cột 3 · 4 · 5",
+      "hl": false
+    },
+    {
+      "muc": "🔴",
+      "viec": "Sửa <b>hai lỗi cổng chặn</b> trên production: con số <i>“300++ doctors”</i> (site chỉ có 2) và FAQ sai phạm vi",
+      "ai": "Pháp chế + Tech",
+      "chan": "⛔ Không đổ nội dung mới lên trước khi sửa",
+      "hl": true
+    },
+    {
+      "muc": "🔴",
+      "viec": "Không cam kết <i>guaranteed · 100% · permanent · painless</i> (<b>R1</b>) — gồm cả <i>“written guarantee”</i> đang có trên trang",
+      "ai": "—",
+      "chan": "⛔ Cấm tuyệt đối, không ngoại lệ",
+      "hl": false
+    },
+    {
+      "muc": "🔴",
+      "viec": "Không nêu thiết bị/sản phẩm sai <b>tên đã đăng ký FDA PH</b> (<b>R7</b>) — PicoSure Pro · filler · chỉ Xline · trụ implant",
+      "ai": "Pháp chế",
+      "chan": "Mọi cụm C06 · C12",
+      "hl": false
+    },
+    {
+      "muc": "🟠",
+      "viec": "Không tuyên bố <i>#1 · best · leading</i> thiếu bằng chứng chuẩn ASC (<b>R6</b>)",
+      "ai": "—",
+      "chan": "Bài thương hiệu · bài so sánh",
+      "hl": false
+    },
+    {
+      "muc": "🟠",
+      "viec": "⛔ Không gửi trường <code>Service of interest</code> vào pixel quảng cáo (<b>R11</b> — RA 10173)",
+      "ai": "Tech + Pháp chế",
+      "chan": "Cấu hình đo lường trụ cột 5",
+      "hl": false
+    },
+    {
+      "muc": "🟠",
+      "viec": "<b>Duyệt trước khi phát</b> — FDA PH · ASC (<b>R9</b>). 4/5 dịch vụ thẩm mỹ dùng health product",
+      "ai": "Pháp chế",
+      "chan": "Nút thắt tiến độ lớn nhất — đưa vào tháng Setup",
+      "hl": true
+    },
+    {
+      "muc": "🟡",
+      "viec": "<b>Cơ hội GEO = 1</b> cho mọi cụm — Sunwoo chưa có mốc traffic AI nào",
+      "ai": "Team SEO",
+      "chan": "Thứ hạng cụm mới dựa trên 3/4 thừa số — chấm lại sau tháng Setup",
+      "hl": false
+    },
+    {
+      "muc": "🟡",
+      "viec": "Hai file tri thức <b>sinh tự động</b>",
+      "ai": "—",
+      "chan": "⛔ Không sửa tay — sửa <code>data/*.json</code> rồi chạy <code>build-index.py</code>",
+      "hl": false
+    }
+  ],
+  "chan_ghi": [
+    {
+      "kieu": "stop",
+      "html": "<p style='margin-bottom:0'><b>Một mốc gốc bịa ra không dừng lại ở bảng Excel.</b> Nó thành chỉ tiêu giao cho người thật, thành hạn chót, rồi thành báo cáo sai cho cả quý — và không ai lần ngược lại được con số đầu tiên sai từ đâu. Agent ghi <code>⚠ Cần Sunwoo xác nhận</code> là <b>hành vi đúng</b>, không phải lỗi cần sửa.</p>"
+    },
+    {
+      "kieu": "ok",
+      "html": "<p style='margin-bottom:0'><b>Vẫn làm được ngay khi chưa có hai câu trả lời chặn cứng:</b> xếp ưu tiên cụm theo 80/20 · quy ra khối lượng bài · định tuyến từng bài về đúng tên miền · rải theo tháng · gắn người phụ trách và hạn chót · đánh dấu sẵn bài nào cần duyệt trước (R9) · và <b>cho thấy chính xác 76 bài nào đang nằm kho vì thiếu một nha sĩ</b>. Phần chỉ tiêu số sẽ hiện thành danh sách cần xác minh, không bị lấp bằng số đoán.</p>"
+    },
+    {
+      "kieu": "warn",
+      "html": "<p style='margin-bottom:0'><b>Một lệch chưa giải:</b> <i>Scar Treatment</i> có trong form đặt lịch đọc ngày 23/10/2026 nhưng <b>không có</b> trong mind map ngày 10/11/2026. Còn chạy thì phải bổ sung bộ truy vấn thứ 11; đã bỏ thì phải gỡ khỏi form. Ba danh sách — form đặt lịch, mind map, bộ truy vấn — <b>phải trùng nhau</b>, vì lệch nhau là nguồn gốc của mọi lỗi báo cáo về sau.</p>"
+    }
+  ],
+  "footer": "Dữ liệu hiện là <b>bản nháp v1</b> suy từ mind map 10/11/2026 — Cơ hội GEO = 1 cho mọi cụm vì chưa có mốc traffic AI. Agent <b>cảnh báo chứ không im lặng làm theo</b>, và <b>không phải luật sư</b>: mọi phần pháp lý phải qua pháp chế phòng khám. <i>Quyết định cuối luôn thuộc người dùng.</i>"
+}

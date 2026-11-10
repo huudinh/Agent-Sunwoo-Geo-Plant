@@ -6,6 +6,18 @@
 
 ---
 
+## 📘 Hướng dẫn sử dụng
+
+> ### → **[Mở trang hướng dẫn](https://claude.ai/artifact/Ru4WTBr3QQWUmsTt5YRQ6W)**
+>
+> Nút Copy sẵn cho bộ não và 8 file tri thức · 13 prompt từ tra dữ liệu đến soát lại · 7 câu smoke test · năm điều phải biết · bảng ranh giới.
+>
+> Trang sinh thẳng từ nội dung repo bằng `python tools/trang-huong-dan.py`, nên **nút Copy luôn khớp file nguồn**.
+
+**Người mới bắt đầu từ trang đó, không phải từ đây.** Repo này là phần file để cài vào Project/GPT/Gem — trang hướng dẫn nói *khi nào dùng cái gì*.
+
+---
+
 ## Nguyên tắc tối thượng
 
 > **Sunwoo không đi kể chuyện mình là K-beauty. Sunwoo đi theo hành trình của một người đang ở Metro Manila, gỡ từng nỗi lo, rồi mới xuất hiện như lời giải.**
@@ -73,6 +85,13 @@ Con số *"300++ board-certified doctors"* (site chỉ có 2) và FAQ nêu *"pla
 | **SWA** Sunwoo Aesthetic | `sunwooaesthetic.ph` | Meso Hair · Filler · Xline Thread Lift · Acne · PicoSure Pro | 102 | ✅ |
 | **SWD** Sunwoo Dental | `sunwoodental.ph` | Smart Bio Implant · Veneers · Wisdom extraction · General dentistry | 76 | ⛔ **BỊ CHẶN (R4)** |
 
+**Hai cấp dữ liệu:**
+
+| Cấp | Ở đâu | Dùng để |
+|---|---|---|
+| **Cụm** — 150 cụm · 204 bài | [`knowledge/geo-bo-truy-van-index.md`](knowledge/geo-bo-truy-van-index.md) *(upload vào Agent)* | Lập kế hoạch, tính chỉ tiêu sản lượng |
+| **Truy vấn** — 2.550 truy vấn EN · 17 dòng/cụm | [`doc/BoTruyVanGEO-Sunwoo/*.xlsx`](doc/BoTruyVanGEO-Sunwoo/) — 10 file **6 sheet** *(giao cho đội content)* | Giao việc từng bài: truy vấn nào, brief gì, tên miền nào |
+
 > 🔶 **Bản nháp v1.** Số liệu suy từ mind map 2026-11-10 + hồ sơ thương hiệu đọc 2026-10-23. Sunwoo **chưa có mốc traffic AI** nên *Cơ hội GEO* = 1 cho mọi cụm. Sau tháng Setup phải chấm lại và chạy lại `tools/build-index.py`.
 
 **Mảng tương lai:** thêm một mảng = thêm **1 file JSON + 1 khối trong `data/lines.json`**, ⛔ không sửa bộ não, không sửa `tools/`. Quy trình 6 bước: [`geo-luat-ba-ten-mien.md` §5](knowledge/geo-luat-ba-ten-mien.md). Khuyến nghị mặc định là **subfolder của tên miền trục**, không mở tên miền thứ tư.
@@ -130,6 +149,9 @@ python tools/build-geo-plan.py --start 2027-01 --months 6   # sinh kế hoạch 
 python tools/build-geo-plan.py --start 2027-01 --months 4 --scope brand,threadlift,filler
 python tools/build-geo-plan.py --start 2027-01 --months 6 --tran 30
 python tools/gop-tham-khao.py                               # gộp 8 file tri thức thành 1
+python tools/build-botruyvan.py                              # sinh 10 bộ truy vấn 6 sheet
+python tools/build-botruyvan.py --scope threadlift           # chỉ một bộ
+python tools/trang-huong-dan.py                              # sinh lại trang hướng dẫn HTML
 ```
 
 ---
@@ -142,6 +164,7 @@ python tools/gop-tham-khao.py                               # gộp 8 file tri t
 | [knowledge/geo-phuong-phap-luan.md](knowledge/geo-phuong-phap-luan.md) | Trục 6 bước · S1–S6 · 4 rào cản PH · 80/20 · **cổng duyệt bác sĩ** · quy tắc rải tháng |
 | [knowledge/geo-luat-ba-ten-mien.md](knowledge/geo-luat-ba-ten-mien.md) | ★ 7 luật nối ba tên miền · bảng định tuyến cụm · **khung mở line mới** |
 | [knowledge/geo-bo-truy-van-index.md](knowledge/geo-bo-truy-van-index.md) | Chỉ mục 10 bộ · 150 cụm · 204 bài *(sinh tự động)* |
+| [doc/BoTruyVanGEO-Sunwoo/](doc/BoTruyVanGEO-Sunwoo/) | ★ 10 bộ truy vấn **6 sheet** · 2.550 truy vấn EN *(sinh tự động, bám mẫu `mui.xlsx` của Kangnam)* |
 | [knowledge/geo-prompt-do-luong.md](knowledge/geo-prompt-do-luong.md) | 36 prompt đo GEO tiếng Anh × 5 nền tảng *(sinh tự động)* |
 | [knowledge/sunwoo-brand-geo.md](knowledge/sunwoo-brand-geo.md) | Sunwoo là ai · 2 bác sĩ · 6 lỗi trang production · 4 vành đai Metro Manila · bảng cần xác nhận |
 | [knowledge/geo-kpi-framework.md](knowledge/geo-kpi-framework.md) | 5 trụ cột KPI bản PH · cách đặt chỉ tiêu · 15 mã KPI nền |
@@ -152,6 +175,8 @@ python tools/gop-tham-khao.py                               # gộp 8 file tri t
 | [doc/02-cau-lenh.md](doc/02-cau-lenh.md) | Công thức ra lệnh · 12 prompt mẫu · điều Agent sẽ từ chối |
 | [doc/03-output-mau.md](doc/03-output-mau.md) | Output mẫu có số thật · dấu hiệu đúng/sai |
 | [doc/CHANGELOG.md](doc/CHANGELOG.md) | Lịch sử cập nhật · việc còn treo |
+| [tools/huong-dan.json](tools/huong-dan.json) | Nội dung trang hướng dẫn — sửa ở đây rồi chạy `trang-huong-dan.py` |
+| [Trang hướng dẫn](https://claude.ai/artifact/Ru4WTBr3QQWUmsTt5YRQ6W) | Bản HTML có nút Copy · 13 prompt mẫu *(sinh tự động, không commit)* |
 
 ---
 
@@ -160,11 +185,15 @@ python tools/gop-tham-khao.py                               # gộp 8 file tri t
 ```
 SYSTEM-PROMPT.md   Bộ não Agent
 knowledge/         8 file tri thức (.md) — upload vào Knowledge; 2 file sinh tự động
-data/              lines.json · query-sets/*.json · geo-prompts.json — nguồn sự thật
+data/              lines.json · query-sets/*.json (cấp cụm) · truy-van/*.json (cấp truy vấn)
+                   geo-prompts.json — nguồn sự thật, KHÔNG upload
+doc/BoTruyVanGEO-Sunwoo/  10 bộ truy vấn 6 sheet (.xlsx) — giao cho đội content
 doc/               Hướng dẫn cài đặt · câu lệnh · output mẫu · changelog
 goi/               Bản gộp dự phòng
 template/          File mẫu Excel 2 TAB
-tools/             build-index.py · build-geo-plan.py · gop-tham-khao.py
+tools/             build-index.py · build-botruyvan.py · build-geo-plan.py
+                   gop-tham-khao.py · trang-huong-dan.py
+                   huong-dan.json (nội dung trang) → huong-dan.html (artifact, không commit)
 out/               File kế hoạch sinh ra (không commit)
 ```
 

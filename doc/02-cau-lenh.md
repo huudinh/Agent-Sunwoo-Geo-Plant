@@ -100,6 +100,10 @@ Agent **nêu đánh đổi rồi mới làm theo** nếu bạn vẫn quyết. Qu
 # sửa dữ liệu rồi sinh lại tri thức
 python tools/build-index.py
 
+# sinh 10 bộ truy vấn 6 sheet — bám mẫu mui.xlsx của Kangnam
+python tools/build-botruyvan.py
+python tools/build-botruyvan.py --scope threadlift,implant
+
 # kế hoạch 6 tháng toàn hệ thống
 python tools/build-geo-plan.py --start 2027-01 --months 6
 

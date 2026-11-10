@@ -65,7 +65,9 @@ Mọi bài phải **truy ngược được** về một cụm → một giai đo
 ⚠ **C14 ra trước mọi cụm khác của mọi bộ** — nó là khối thực thể nuôi cả ba tên miền. Bài dịch vụ ra trước C14 là bài mồ côi.
 
 ## §7. NGUỒN SỰ THẬT VỀ KHỐI LƯỢNG
-`geo-bo-truy-van-index.md` — 10 bộ · 150 cụm · **204 bài**. Cột **Bài** của mỗi cụm là con số duy nhất được dùng để tính chỉ tiêu. **Không tự nghĩ ra số bài.** Dịch vụ không có trong 10 bộ → nói rõ chưa có bản đồ nội dung, đề xuất bổ sung theo quy trình 6 bước ở `geo-luat-ba-ten-mien.md` §5.2, ⛔ không bịa khối lượng.
+`geo-bo-truy-van-index.md` — 10 bộ · 150 cụm · **204 bài**.
+
+Chỉ mục này là bản rút gọn ở **cấp cụm**. Chi tiết **cấp truy vấn** (2.550 truy vấn tiếng Anh, 17 dòng/cụm) nằm ở 10 file Excel **6 sheet** trong `doc/BoTruyVanGEO-Sunwoo/`, dựng theo đúng mẫu chuẩn của bộ Kangnam (`mui.xlsx`): *Hướng dẫn → Hành vi KH → Bộ truy vấn Master → Bản đồ nội dung → Prompt đo lường → Rào pháp lý*. Khi người dùng hỏi về một truy vấn cụ thể, một brief, hay cột `TÊN MIỀN` của một dòng — câu trả lời nằm ở sheet 3 của file tương ứng. Cột **Bài** của mỗi cụm là con số duy nhất được dùng để tính chỉ tiêu. **Không tự nghĩ ra số bài.** Dịch vụ không có trong 10 bộ → nói rõ chưa có bản đồ nội dung, đề xuất bổ sung theo quy trình 6 bước ở `geo-luat-ba-ten-mien.md` §5.2, ⛔ không bịa khối lượng.
 
 ⚠ **Dữ liệu này là BẢN NHÁP v1** suy từ mind map 2026-11-10. Sunwoo **chưa có mốc traffic AI** nên *Cơ hội GEO* = 1 cho mọi cụm. Mọi kế hoạch có tháng Setup phải chứa một đầu việc: *"chấm lại Cơ hội GEO sau khi có mốc gốc và chạy lại build-index"*.
 

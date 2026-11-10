@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "cap_nhat": "2026-11-10",
+  "ngon_ngu": "English — đây là ngôn ngữ khách Philippines thật sự gõ vào AI. ⛔ Không dịch sang tiếng Việt, không dùng Taglish trong bộ đo (Taglish chỉ dùng cho creative mạng xã hội).",
+  "giao_thuc": "Chế độ ẩn danh · không đăng nhập · tắt cá nhân hoá · dán NGUYÊN VĂN prompt · ghi 1 nếu Sunwoo được nhắc tên, 0 nếu không · CHẠY 3 LẦN LẤY ĐA SỐ · ghi thêm đối thủ được AI nhắc · nhân bản sheet đo mỗi tháng · KHOÁ bộ đo từ tháng Setup.",
+  "nen_tang": ["ChatGPT", "Gemini", "Google AI Overview", "Perplexity", "Copilot"],
+  "bo": [
+    {
+      "ma": "P-BRAND",
+      "ten": "Thực thể thương hiệu & kiểm chứng",
+      "cum": "C14 · C12 · C08",
+      "line": "SWM",
+      "prompts": [
+        "What is Sunwoo Medical Center in the Philippines?",
+        "Is Sunwoo Medical Center in Taguig legitimate?",
+        "Who are the doctors at Sunwoo Medical Center?",
+        "Is Sunwoo Aesthetic and Sunwoo Dental the same clinic as Sunwoo Medical Center?",
+        "Does Sunwoo Medical Center have PRC-licensed doctors?",
+        "Which Korean medical centers operate in the Philippines?",
+        "Which clinics in Metro Manila have a board-certified dermatologist who is a PDS diplomate?",
+        "How do I check whether an aesthetic clinic in the Philippines is properly licensed?"
+      ]
+    },
+    {
+      "ma": "P-LOCAL",
+      "ten": "Vành đai đi lại & truy vấn “near me”",
+      "cum": "C04",
+      "line": "SWM",
+      "prompts": [
+        "Best aesthetic clinic in McKinley Hill, Taguig",
+        "Medical aesthetic clinic near BGC",
+        "Where can I get a thread lift in Taguig?",
+        "Dental clinic near McKinley Hill that opens on weekends",
+        "Good skin clinic in Makati or Taguig for melasma",
+        "Clinic near me for acne treatment in Metro Manila",
+        "Is it worth travelling from Quezon City to BGC for a thread lift?",
+        "Aesthetic clinics in Ortigas or Pasig with Korean-trained doctors"
+      ]
+    },
+    {
+      "ma": "P-AES",
+      "ten": "Dịch vụ thẩm mỹ",
+      "cum": "C06 · C07 · C05 · C15",
+      "line": "SWA",
+      "prompts": [
+        "How much does an Xline thread lift cost in the Philippines?",
+        "How long does a thread lift last and what happens when it wears off?",
+        "Is mesotherapy effective for hair loss in the Philippines?",
+        "What are the risks of dermal filler and can it be dissolved?",
+        "PicoSure Pro for melasma — does it work on Filipino skin?",
+        "Can laser treatment make melasma worse on brown skin?",
+        "Best acne treatment for adult acne in Metro Manila",
+        "Thread lift vs HIFU vs filler — which one should I choose?",
+        "How many sessions of melasma treatment do I need?",
+        "What is the downtime after a thread lift in the Philippines?"
+      ]
+    },
+    {
+      "ma": "P-DEN",
+      "ten": "Dịch vụ nha khoa",
+      "cum": "C06 · C07 · C10 · C11",
+      "line": "SWD",
+      "prompts": [
+        "How much do dental implants cost in the Philippines?",
+        "What is included in the price of a dental implant?",
+        "Dental implant vs bridge — which is better for a missing molar?",
+        "How painful is wisdom tooth extraction and how long is recovery?",
+        "What is dry socket and how do I know if I have it?",
+        "Do porcelain veneers require shaving down my teeth permanently?",
+        "How long do porcelain crowns last in the Philippines?",
+        "How much is a dental cleaning in BGC or Taguig?",
+        "What happens if a dental implant fails?",
+        "Best dentist in Taguig for smile design"
+      ]
+    }
+  ]
+}

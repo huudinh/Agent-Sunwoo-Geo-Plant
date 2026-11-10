@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "cap_nhat": "2026-11-10",
+  "ghi_chu": "SỔ ĐĂNG KÝ LINE — nguồn sự thật về việc Sunwoo có mấy mảng, mảng nào ở tên miền nào, ai thẩm định chuyên môn. Thêm một mảng dịch vụ mới = thêm một khối vào mảng `lines` + thêm file data/query-sets/<key>.json, KHÔNG sửa SYSTEM-PROMPT và KHÔNG sửa tools.",
+  "ten_mien_truc": "sunwoomedical.ph",
+  "phap_nhan": "⚠ Cần Sunwoo xác nhận — ba tên miền do MỘT hay NHIỀU pháp nhân đứng tên (chặn rào R3)",
+  "co_so": {
+    "ten": "Sunwoo Medical Center",
+    "dia_chi": "Ground floor, 20 Upper McKinley Hill, Taguig, Metro Manila, Philippines",
+    "hotline": "+63 96 8885 8885",
+    "so_co_so": 1,
+    "ghi_chu": "MỘT cơ sở duy nhất. Không có mạng lưới chi nhánh — cụm LOCAL C04 là truy vấn theo VÀNH ĐAI đi lại, không phải theo chi nhánh."
+  },
+  "lines": [
+    {
+      "ma": "SWM",
+      "ten_en": "Sunwoo Medical Center",
+      "ten_vi": "Thương hiệu tổng & trục thực thể",
+      "domain": "sunwoomedical.ph",
+      "vai_tro": "hub",
+      "trang_thai": "active",
+      "bo": ["brand"],
+      "bac_si_tham_dinh": ["Dr. Emanuel F. Gatdula", "Dr. Sharmaine Esquilona"],
+      "cong_chan": null,
+      "ghi_chu": "Tên miền TRỤC. Bốn cụm C08 · C12 · C13 · C14 của MỌI bộ đều xuất bản tại đây, không nhân bản sang hai tên miền còn lại."
+    },
+    {
+      "ma": "SWA",
+      "ten_en": "Sunwoo Aesthetic",
+      "ten_vi": "Thẩm mỹ nội khoa & da liễu",
+      "domain": "sunwooaesthetic.ph",
+      "vai_tro": "service",
+      "trang_thai": "active",
+      "bo": ["mesohair", "filler", "threadlift", "acne", "picosure"],
+      "bac_si_tham_dinh": ["Dr. Emanuel F. Gatdula — Diplomate, Philippine Dermatological Society", "Dr. Sharmaine Esquilona — Certificate in Aesthetic Medicine (Level I), AMI Philippines"],
+      "cong_chan": null,
+      "ghi_chu": "Hiện là one-page WordPress → mọi trang đích trong bản đồ nội dung đều là trang MỚI."
+    },
+    {
+      "ma": "SWD",
+      "ten_en": "Sunwoo Dental",
+      "ten_vi": "Nha khoa",
+      "domain": "sunwoodental.ph",
+      "vai_tro": "service",
+      "trang_thai": "blocked",
+      "bo": ["implant", "veneers", "wisdom", "generaldentistry"],
+      "bac_si_tham_dinh": [],
+      "cong_chan": "⛔ CHƯA CÓ NHA SĨ ĐƯỢC NÊU TÊN. Hai bác sĩ đã công bố là bác sĩ da liễu và bác sĩ thẩm mỹ nội khoa — không ai thẩm định được nội dung nha khoa. Rào R4 (PRC) chặn toàn bộ bài y khoa của line này cho tới khi Sunwoo cung cấp tên + số giấy phép PRC của ít nhất một nha sĩ.",
+      "ghi_chu": "Agent VẪN lập được kế hoạch cho line này, nhưng mọi dòng công việc phải mang nhãn [BLOCKED · R4] và hạn chót tính từ ngày có nha sĩ, không tính từ hôm nay."
+    }
+  ],
+  "line_tuong_lai": {
+    "huong_dan": "Sunwoo dự định mở thêm mảng dịch vụ ở thị trường Philippines. Quy trình onboard một mảng mới — 6 bước, xem knowledge/geo-luat-ba-ten-mien.md §5:",
+    "buoc": [
+      "1. Chốt tên miền: dùng subfolder của sunwoomedical.ph (khuyến nghị) hay mở tên miền thứ tư (phải trả giá thực thể, xem §2).",
+      "2. Thêm một khối vào `lines` với mã SW<x>, vai_tro = service, trang_thai = draft.",
+      "3. Xác minh bác sĩ thẩm định đúng chuyên khoa + số PRC → điền `bac_si_tham_dinh`. Trống thì trang_thai = blocked.",
+      "4. Soạn data/query-sets/<key>.json theo đúng khung 15 cụm C01–C15.",
+      "5. Chạy `python tools/build-index.py` để sinh lại chỉ mục tri thức.",
+      "6. Chạy `python tools/build-geo-plan.py` — line mới tự vào kế hoạch, không sửa dòng mã nào."
+    ]
+  }
+}
